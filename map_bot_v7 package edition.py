@@ -1,7 +1,7 @@
 import discord
 import numpy as np
 import os
-from char_read import char_update
+from char_read import char_firstup
 from map_utils import map_close, map_create, update_map, map_cmove, map_cremove, create_map_msg, map_redraw, map_help
 
 client = discord.Client()
@@ -59,8 +59,8 @@ async def on_message(message):
         
         await map_help(message.channel)
 
-    elif message.content.startswith("chars.up"):
+    elif message.content.startswith("chars.firstup"):
         
-        await char_update(message.channel, message.guild.channels)
+        await char_firstup(message.channel, message.guild.channels)
 
 client.run(open_token_file())

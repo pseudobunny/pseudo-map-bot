@@ -1,7 +1,8 @@
 import discord
 from .char_readv2 import collect_char_embs
+from .char_json import char_json
 
-async def char_update(chan,g_chans):
+async def char_firstup(chan,g_chans):
 
     try:
         char_embs, char_chans = collect_char_embs()
@@ -15,6 +16,8 @@ async def char_update(chan,g_chans):
                 await char_chans_true[i].purge(limit = None)
 
         for i in range(len(char_embs)):
-            await char_chans_true[i].send(content = None, embed = char_embs[i])
+            char_dict = char_embs[i].to_dict()
+            char_msg = await char_chans_true[i].send(content = None, embed = char_embs[i])
+            char_json(char_dict['title'], char_msg)
     except:
         await chan.send("Failed to collect characters.")

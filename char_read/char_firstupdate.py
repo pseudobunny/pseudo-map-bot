@@ -5,7 +5,7 @@ from .char_json import char_json
 async def char_firstup(chan,g_chans):
 
     try:
-        char_embs, char_chans = collect_char_embs()
+        char_embs, char_chans, char_files = collect_char_embs()
         
         uni_chans = []
         char_chans_true = []
@@ -18,6 +18,6 @@ async def char_firstup(chan,g_chans):
         for i in range(len(char_embs)):
             char_dict = char_embs[i].to_dict()
             char_msg = await char_chans_true[i].send(content = None, embed = char_embs[i])
-            char_json(char_dict['title'], char_msg)
+            char_json(char_dict['title'], char_msg, char_files[i])
     except:
         await chan.send("Failed to collect characters.")

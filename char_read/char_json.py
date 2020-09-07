@@ -8,14 +8,14 @@ def write_to_json(data):
 def char_append(c_data):
     with open('char_msgs.json', 'r') as f:
         total_data = json.load(f)
-        
+
     total_data.update(c_data)
 
     write_to_json(total_data)
 
-def char_json(name, msg):
+def char_json(name, msg, c_file):
 
-    c_data = { name: {"msg_id" : msg.id, "chan_id" : msg.channel.id}}
+    c_data = { name: {"msg_id" : msg.id, "chan_id" : msg.channel.id, "file name": c_file}}
 
     try:
         char_append(c_data)

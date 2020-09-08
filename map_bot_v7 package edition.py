@@ -66,5 +66,6 @@ async def on_message(message):
     elif message.content.startswith("chars.update"):
         
         await char_update(client, " ".join(message.content.split()[1:]))
+        await message.delete()
 
 client.run(open_token_file())

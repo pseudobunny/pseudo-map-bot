@@ -11,9 +11,9 @@ def find_trait(t):
 
     return -1
 
-def collect_traits(file):
+def collect_traits(c_file):
 
-    char_lines = file.readlines()
+    char_lines = c_file.readlines()
 
     traits = []
     trait_names = ["Name", "Age", "Description", "Reason to Climb", "Position", "Channel"]
@@ -41,17 +41,25 @@ def build_emb(traits):
         emb.add_field(name = traits[i+1][0], value = traits[i+1][1], inline = False)
     
     return emb
+
+def build_char(c_file):
+
+    char_file = open(os.path.join(".\\tog_chars", c_file), "r")
+    traits = collect_traits(char_file)
     
+    return traits, build_emb(traits)
 
 def collect_char_embs():
 
     char_embs = []
     char_chans = []
+    char_files = []
 
-    for file in os.listdir(".\\tog_chars"):
-        if file.endswith(".txt"):
-            char_file = open(os.path.join(".\\tog_chars", file), "r")
-            traits = collect_traits(char_file)
-            char_embs.append(build_emb(traits))
+    for c_file in os.listdir(".\\tog_chars"):
+        if c_file.endswith(".txt"):
+            traits, c_emb = build_char(c_file)
+            char_embs.append(c_emb)
             char_chans.append(traits[len(traits)-1][1])
-    return char_embs, char_chans
+            char_files.append(c_file)
+    
+    return char_embs, char_chans, char_files

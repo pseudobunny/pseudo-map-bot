@@ -1,20 +1,17 @@
 import discord
-from .char_readv2 import collect_char_embs
+import json
+from .char_readv2 import *
 
-async def char_update(chan,g_chans):
+async def char_update(bot, char):
 
-    try:
-        char_embs, char_chans = collect_char_embs()
-        
-        uni_chans = []
-        char_chans_true = []
-        for i in range(len(char_chans)):
-            char_chans_true.append(discord.utils.find(lambda c: c.name == char_chans[i], g_chans))
-            if not (char_chans_true[i] in uni_chans):
-                uni_chans.append(char_chans_true[i])
-                await char_chans_true[i].purge(limit = None)
+    with open("char_msgs.json", "r") as f:
+        data = json.load(f)
 
-        for i in range(len(char_embs)):
-            await char_chans_true[i].send(content = None, embed = char_embs[i])
-    except:
-        await chan.send("Failed to collect characters.")
+    for data_c in data:
+        if char in data_c:
+            c_file_name = data[data_c]["file name"]
+            _, c_emb = build_char(c_file_name)
+            
+            chan = bot.get_channel(data[data_c]['chan_id'])
+            msg = await chan.fetch_message(data[data_c]['msg_id'])
+            await msg.edit(embed = c_emb)

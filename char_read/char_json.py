@@ -5,19 +5,29 @@ def write_to_json(data):
     with open('char_msgs.json', 'w') as f:
         json.dump(data, f, indent=4, separators=(", ", ": "), sort_keys=True)
 
-def char_append(c_data):
+def char_append(c_data, ch_id):
     with open('char_msgs.json', 'r') as f:
         total_data = json.load(f)
 
-    total_data.update(c_data)
+    try:
+        total_data[str(ch_id)].append(c_data)
+        print(total_data[str(ch_id)])
+    except:
+        new_data = {ch_id: [c_data]}
+        total_data.update(new_data)
 
     write_to_json(total_data)
 
-def char_json(name, msg, c_file):
+def char_json(char):
 
-    c_data = { name: {"msg_id" : msg.id, "chan_id" : msg.channel.id, "file name": c_file}}
+    c_data = char.to_dict()
 
     try:
-        char_append(c_data)
+        char_append(c_data, char.chan_obj.id)
     except:
-        write_to_json(c_data)
+        new_data = {char.chan_obj.id: [c_data]}
+        write_to_json(new_data)
+
+def json_reset():
+    with open('char_msgs.json', 'w') as f:
+        json.dump({}, f, indent=4, separators=(", ", ": "), sort_keys=True)

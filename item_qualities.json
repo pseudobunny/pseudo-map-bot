@@ -1,0 +1,138 @@
+{
+    "Armor Inventory": {
+        "type": "item",
+        "price": 1000
+    },
+    "Arms Inventory": {
+        "type": "item",
+        "price": 500
+    },
+    "Combat Observer": {
+        "type": "item",
+        "price": 1000
+    },
+    "Launcher": {
+        "type": "item",
+        "price": 1000
+    },
+    "Lighthouse Core": {
+        "type": "item",
+        "price": 800
+    },
+    "Pipe": {
+        "type": "item",
+        "price": 600
+    },
+    "Reel Inventory": {
+        "type": "item",
+        "price": 500
+    },
+    "Support Observer": {
+        "type": "item",
+        "price": 600
+    },
+    "Wand": {
+        "type": "item",
+        "price": 750
+    },
+    "Bludgeon": {
+        "type": "melee",
+        "price": 300
+    },
+    "Club": {
+        "type": "melee",
+        "price": 250
+    },
+    "Hook": {
+        "type": "melee",
+        "price": 250
+    },
+    "Knuckle Duster": {
+        "type": "melee",
+        "price": 150
+    },
+    "Gauntlet": {
+        "type": "melee",
+        "price": 250
+    },
+    "Needle": {
+        "type": "melee",
+        "price": 250
+    },
+    "Scythe": {
+        "type": "melee",
+        "price": 300
+    },
+    "Spear": {
+        "type": "melee",
+        "price": 250
+    },
+    "Short Spear": {
+        "type": "melee",
+        "price": 250
+    },
+    "Sword": {
+        "type": "melee",
+        "price": 300
+    },
+    "Great Sword": {
+        "type": "melee",
+        "price": 350
+    },
+    "Bow": {
+        "type": "ranged",
+        "price": 250
+    },
+    "Great Bow": {
+        "type": "ranged",
+        "price": 350
+    },
+    "Crossbow": {
+        "type": "ranged",
+        "price": 250
+    },
+    "Spring Loaded Crossbow": {
+        "type": "ranged",
+        "price": 300
+    },
+    "Explosives": {
+        "type": "ranged",
+        "price": 300
+    },
+    "Rifle": {
+        "type": "ranged",
+        "price": 350
+    },
+    "Small Arms": {
+        "type": "ranged",
+        "price": 300
+    },
+    "Boomerang": {
+        "type": "thrown",
+        "price": 200
+    },
+    "Heavy Boomerang": {
+        "type": "thrown",
+        "price": 300
+    },
+    "Dagger": {
+        "type": "thrown",
+        "price": 200
+    },
+    "Dart": {
+        "type": "thrown",
+        "price": 250
+    },
+    "Throwing Needle": {
+        "type": "thrown",
+        "price": 200
+    },
+    "Mini Needle": {
+        "type": "thrown",
+        "price": 200
+    },
+    "Throwing Spear": {
+        "type": "thrown",
+        "price": 200
+    }
+}

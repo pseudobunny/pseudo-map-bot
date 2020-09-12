@@ -3,6 +3,7 @@ import numpy as np
 import os
 from char_read import char_firstup, char_update
 from map_utils import map_close, map_create, update_map, map_cmove, map_cremove, create_map_msg, map_redraw, map_help
+from item_utils import item_price
 
 client = discord.Client()
 
@@ -67,5 +68,8 @@ async def on_message(message):
         
         await char_update(client, " ".join(message.content.split()[1:]))
         await message.delete()
+
+    elif message.content.startswith("item.price"):
+        await item_price(message)
 
 client.run(open_token_file())

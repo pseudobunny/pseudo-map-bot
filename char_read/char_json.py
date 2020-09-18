@@ -11,7 +11,6 @@ def char_append(c_data, ch_id):
 
     try:
         total_data[str(ch_id)].append(c_data)
-        print(total_data[str(ch_id)])
     except:
         new_data = {ch_id: [c_data]}
         total_data.update(new_data)

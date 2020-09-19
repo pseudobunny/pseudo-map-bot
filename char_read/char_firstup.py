@@ -11,13 +11,15 @@ async def char_firstup(chan, g_chans):
 
         uni_chans = []
         for char in char_list:
-            char.chan_obj = discord.utils.find(lambda c: c.name == char.chan_name, g_chans)
+            char.find_chan_obj(g_chans)
             if not (char.chan_obj in uni_chans):
                 uni_chans.append(char.chan_obj)
-                await char.chan_obj.purge(limit = None)
+
+        for chans in uni_chans:
+            await chans.purge(limit = None)
 
         for char in char_list:
-            char.msg = await char.chan_obj.send(content = None, embed = char.emb)
+            await char.send_msg()
             char_json(char)
 
     except:

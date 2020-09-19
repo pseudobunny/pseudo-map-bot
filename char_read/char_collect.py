@@ -34,6 +34,15 @@ class TtChar:
     def to_dict(self):
         return {self.name : {"msg_id": self.msg.id, "file name": self.c_file}}
 
+    def find_chan_obj(self, g_chans):
+        self.chan_obj = discord.utils.find(lambda c: c.name == self.chan_name, g_chans)
+
+    async def send_msg(self):
+        self.msg = await self.chan_obj.send(content = None, embed = self.emb)
+    
+    async def find_msg(self, m_id):
+        self.msg = await self.chan_obj.fetch_message(m_id)
+
 def collect_chars():
 
     char_list = []

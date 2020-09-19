@@ -2,7 +2,6 @@ import discord
 import json
 
 def write_to_json(data):
-    print(data)
     with open('char_msgs.json', 'w') as f:
         json.dump(data, f, indent=4, separators=(", ", ": "), sort_keys=True)
 

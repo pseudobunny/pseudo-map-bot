@@ -5,3 +5,5 @@ from .map_cmove import map_cmove
 from .map_cremove import map_cremove
 from .map_redraw import map_redraw
 from .map_help import map_help
+from .map_add_char import add_map_char
+from .map_tile import reset_map_tile

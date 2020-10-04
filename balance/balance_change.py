@@ -24,6 +24,8 @@ async def bal_change(mess):
             await mess.channel.send(f"{mess.author.mention}, your new balance is {new_bal} credits.")
         else:
             await mess.channel.send(f"{mess.author.mention}, sorry... we couldn't find your balance to add to! We'll set one up for you.")
-            bal_set(mess.author.name, 0)
+            new_bal = (params[0] * params[1])
+            bal_set(mess.author.name, new_bal)
+            await mess.channel.send(f"{mess.author.mention}, your new balance is {new_bal} credits.")
     except:
         await mess.channel.send(f"{mess.author.mention}, please format your balance change as bal.[add/sub] [amount].")

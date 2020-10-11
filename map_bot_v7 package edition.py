@@ -5,6 +5,7 @@ from char_read import char_firstup, char_update, char_add
 from map_utils import map_close, map_create, update_map, map_cmove, map_cremove, create_map_msg, map_redraw, map_help, add_map_char, reset_map_tile
 from item_utils import item_price, item_help
 from balance import balance_show, bal_change, bank_set, balance_buy
+from inventory import add_item, show_inv
 
 client = discord.Client()
 
@@ -99,5 +100,11 @@ async def on_message(message):
 
     elif message.content.startswith("bal.buy"):
         await balance_buy(client,message)
+
+    elif message.content.startswith("inv.add"):
+        await add_item(message)
+
+    elif message.content.startswith("inv.show"):
+        await show_inv(message)
 
 client.run(open_token_file())

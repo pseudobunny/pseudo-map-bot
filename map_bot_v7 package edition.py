@@ -2,7 +2,7 @@ import discord
 import numpy as np
 import os
 from char_read import char_firstup, char_update, char_add
-from map_utils import map_close, map_create, update_map, map_cmove, map_cremove, create_map_msg, map_redraw, map_help
+from map_utils import map_close, map_create, update_map, map_cmove, map_cremove, create_map_msg, map_redraw, map_help, add_map_char, reset_map_tile
 from item_utils import item_price, item_help
 from balance import balance_show, bal_change, bank_set, balance_buy
 
@@ -57,9 +57,18 @@ async def on_message(message):
 
         current_map_message = await map_redraw(message, current_map, current_map_message)
 
+    elif message.content.startswith("map.add"):
+        await add_map_char(message)
+
     elif message.content.startswith("map.help"):
         
         await map_help(message.channel)
+
+    elif message.content.startswith("map.charreset"):
+        to_close = await reset_map_tile(message, current_map_message, client)
+        if to_close:
+            current_map_message = None
+            current_map = None
 
     elif message.content.startswith("chars.firstup"):
         

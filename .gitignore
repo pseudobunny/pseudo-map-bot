@@ -4,3 +4,5 @@ char_msgs.json
 tog_jsons
 tog_jsons_hidden
 char_readv2_to_json.py
+char_balances.json
+__pycache__/

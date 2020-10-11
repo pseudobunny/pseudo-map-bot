@@ -7,12 +7,11 @@ async def create_map_msg(chan, c_map):
     return await chan.send(content = None, embed = await map_emb_creation(c_map))
 
 async def map_create(mess):
-    
     try:
         parameters = mess.content.split(" ")[1:]
         rows = int(parameters[0])
         columns = int(parameters[1])
-        current_map = np.zeros((rows, columns))
+        current_map = np.full((rows, columns), "", dtype='object')
 
         await mess.delete()
 

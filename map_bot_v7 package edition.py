@@ -1,11 +1,11 @@
 import discord
 import numpy as np
 import os
-from char_read import char_firstup, char_update, char_add
-from map_utils import map_close, map_create, update_map, map_cmove, map_cremove, create_map_msg, map_redraw, map_help, add_map_char, reset_map_tile
-from item_utils import item_price, item_help
-from balance import balance_show, bal_change, bank_set, balance_buy
-from inventory import add_item, show_inv
+from char_read import run_chars_command
+from map_utils import run_map_command
+from item_utils import run_item_command
+from balance import run_bal_command
+from inventory import run_inv_command
 
 client = discord.Client()
 
@@ -26,85 +26,15 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    
     if message.author == client.user:
         return
 
-    global current_map
-    global current_map_message
+    prefixes = ['map.', 'chars.', 'item.', 'bal', 'inv']
+    command_runners = [run_map_command, run_chars_command, run_item_command, run_bal_command, run_inv_command]
 
-    if message.content.startswith("map.create"):
-        
-        current_map, current_map_message = await map_create(message)
-    
-    elif message.content.startswith("map.close"):
-        
-        await map_close(current_map_message,message.channel)
-        current_map_message = None
-        current_map = None
-    
-    elif message.content.startswith("map.update"):
-        
-        current_map = await update_map(message, current_map, current_map_message)
-
-    elif message.content.startswith("map.cmove"):
-        
-        current_map = await map_cmove(message, current_map, current_map_message)
-
-    elif message.content.startswith("map.cremove"):
-
-        current_map = await map_cremove(message, current_map, current_map_message)
-
-    elif message.content.startswith("map.redraw"):
-
-        current_map_message = await map_redraw(message, current_map, current_map_message)
-
-    elif message.content.startswith("map.add"):
-        await add_map_char(message)
-
-    elif message.content.startswith("map.help"):
-        
-        await map_help(message.channel)
-
-    elif message.content.startswith("map.charreset"):
-        to_close = await reset_map_tile(message, current_map_message, client)
-        if to_close:
-            current_map_message = None
-            current_map = None
-
-    elif message.content.startswith("chars.firstup"):
-        
-        await char_firstup(message.channel, message.guild.channels)
-
-    elif message.content.startswith("chars.update"):
-        
-        await char_update(client, " ".join(message.content.split()[1:]))
-        await message.delete()
-
-    elif message.content.startswith("chars.add"):
-        await char_add(message)
-
-    elif message.content.startswith("item.price"):
-        await item_price(message)
-
-    elif message.content.startswith("item.help"):
-        await item_help(message.channel)
-
-    elif message.content.startswith("bal.show"):
-        await balance_show(message)
-    
-    #elif message.content.startswith("bal.add") or message.content.startswith("bal.sub"):
-    #    await bal_change(message)
-
-    elif message.content.startswith("bal.bank"):
-        await bank_set(message)
-
-    elif message.content.startswith("bal.buy"):
-        await balance_buy(client,message)
-
-    elif message.content.startswith("inv.add"):
-        await add_item(message)
-
-    elif message.content.startswith("inv.show"):
-        await show_inv(message)
+    for i in range(len(prefixes)):
+        if message.content.startswith(prefixes[i]):
+            await command_runners[i](message, client)
 
 client.run(open_token_file())

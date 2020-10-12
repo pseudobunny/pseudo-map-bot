@@ -7,3 +7,4 @@ from .map_redraw import map_redraw
 from .map_help import map_help
 from .map_add_char import add_map_char
 from .map_tile import reset_map_tile
+from .commands import run_map_command
